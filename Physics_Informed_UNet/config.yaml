@@ -1,0 +1,38 @@
+model:
+  input_shape: [256, 256, 1]  # [height, width, channels]
+  num_filters: 64
+  num_classes: 1
+  physics_weight: 0.1  # Weight for physics-based loss term
+
+training:
+  learning_rate: 1e-4
+  batch_size: 32
+  epochs: 100
+  early_stopping_patience: 10
+  lr_patience: 5
+  log_dir: "logs"
+  model_dir: "saved_models"
+
+data:
+  train_path: "data/train_data.npy"
+  val_path: "data/val_data.npy"
+  test_path: "data/test_data.npy"
+
+# Physics constraints configuration
+physics:
+  # Example physics constraints - modify based on your specific application
+  gradient_weight: 0.1
+  divergence_weight: 0.05
+  boundary_conditions:
+    type: "periodic"  # or "dirichlet", "neumann"
+    weight: 0.1
+
+# Data augmentation settings
+augmentation:
+  enabled: true
+  rotation_range: 20
+  width_shift_range: 0.1
+  height_shift_range: 0.1
+  horizontal_flip: true
+  vertical_flip: true
+  fill_mode: "reflect" 
